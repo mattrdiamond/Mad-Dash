@@ -1,3 +1,44 @@
 body {
     text-align: center;
+    background: #1d1d1d;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+canvas {
+  margin-top: -20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.scoreboard {
+  width: 505px;
+  height: 50px;
+  margin: 30px auto 0;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+}
+
+.scoreboard li {
+  display: inline-block;
+  width: 140px;
+  text-align: left;
+}
+
+.scoreboard-hearts {
+  display: inline-block;
+  width: 72px;
+  text-align: left;
+}
+.scoreboard-hearts li {
+  display: inline;
+  color: #ff4c02;
+}
+
+.scoreboard-hearts ul {
+  padding: 0;
 }

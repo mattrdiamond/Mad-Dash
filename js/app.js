@@ -88,6 +88,9 @@ Player.prototype.update = function(dt) {
     this.y = 375;
   }
 
+  //check to see if player reaches top of board
+  
+
 }
 
 

@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    background: #1d1d1d;
+    background: #263165;
     font-family: 'Montserrat Alternates', sans-serif;
 }
 
@@ -11,14 +11,16 @@ canvas {
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .scoreboard {
   width: 505px;
-  height: 50px;
+  height: 30px;
   margin: 30px auto 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   color: white;
   font-size: 20px;
 }
@@ -31,7 +33,7 @@ ul {
 
 .scoreboard-hearts {
   display: inline-block;
-  width: 72px;
+  width: 75px;
   text-align: left;
 }
 .scoreboard-hearts li {
@@ -41,4 +43,8 @@ ul {
 
 .scoreboard-hearts ul {
   padding: 0;
+}
+
+.scoreboard-hearts img {
+  width: 25px;
 }

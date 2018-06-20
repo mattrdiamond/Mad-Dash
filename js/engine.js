@@ -66,6 +66,7 @@ var Engine = (function(global) {
         reset();
         lastTime = Date.now();
         main();
+
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -93,7 +94,11 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
+
+        allRocks.forEach(function(rock) {
+            rock.update();
+        });
+        player.update(dt);
     }
 
     /* This function initially draws the "game level", it will then call
@@ -117,6 +122,10 @@ var Engine = (function(global) {
             numRows = 6,
             numCols = 5,
             row, col;
+
+            if (player.level > 3) {
+              rowImages[4] = 'images/stone-block.png';
+            }
 
         // Before drawing, clear existing canvas
         ctx.clearRect(0,0,canvas.width,canvas.height)
@@ -153,6 +162,9 @@ var Engine = (function(global) {
             enemy.render();
         });
 
+        allRocks.forEach(function(rock) {
+          rock.render();
+        });
         player.render();
     }
 
@@ -162,6 +174,9 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
+        startEnemies(3);
+        createRocks(random(2, 3));
+        player.restoreHealth(3);
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -173,8 +188,10 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
+        'images/enemy-bug-reverse.png',
         'images/char-boy.png',
-        'images/char-cat-girl.png',
+        'images/char-boy-hurt.png',
+        'images/rock.png',
     ]);
     Resources.onReady(init);
 

@@ -233,11 +233,11 @@ var heart = '<img src = "images/heart.png">';
 // set health based on life count
 // check if dead
 
+// heart counter (old)
 Player.prototype.restoreHealth = function(lives) {
-  // this.lives = 3;
-  for (var i = 0; i < lives; i++) {
-    document.querySelector('.scoreboard-hearts').innerHTML += heart;
-  }
+  // for (var i = 0; i < lives; i++) {
+  //   document.querySelector('.scoreboard-hearts').innerHTML += heart;
+  // }
 }
 
 
@@ -259,7 +259,7 @@ Player.prototype.playerDied = function() {
   }
   // 3. remove health
   this.lives--;
-  document.querySelector('.scoreboard-hearts').firstElementChild.remove(1);
+  document.getElementById('lives').innerHTML = this.lives;
   if (this.lives < 1) {
     console.log(`you're toast, bro`);
   }
@@ -291,6 +291,17 @@ function checkCollisions() {
 function random(min, max) {
   return Math.random() * (max - min) + min;
 }
+
+//avatar selection
+document.querySelector('.avatar-container').addEventListener('click', function(e) {
+  var thisCharacter = e.target.classList;
+  if (thisCharacter.contains('avatar')) {
+    player.sprite = 'images/char-' + thisCharacter[1] + '.png';
+  }
+  document.getElementById('avatarModal').classList.toggle('hidden');
+})
+
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

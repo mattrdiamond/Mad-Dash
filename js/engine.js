@@ -94,9 +94,11 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-
         allRocks.forEach(function(rock) {
             rock.update();
+        });
+        allItems.forEach(function(item) {
+            item.update();
         });
         player.update(dt);
     }
@@ -161,9 +163,11 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
         allRocks.forEach(function(rock) {
-          rock.render();
+            rock.render();
+        });
+        allItems.forEach(function(item) {
+            item.render();
         });
         player.render();
     }
@@ -176,6 +180,7 @@ var Engine = (function(global) {
         // noop
         startEnemies(3);
         createRocks(random(2, 3));
+        createItems(1);
         player.restoreHealth(3);
     }
 
@@ -198,6 +203,11 @@ var Engine = (function(global) {
         'images/char-horn-girl-hurt.png',
         'images/char-cat-girl.png',
         'images/char-cat-girl-hurt.png',
+        'images/Gem Blue.png',
+        'images/Gem Green.png',
+        'images/Gem Orange.png',
+        'images/star.png',
+        'images/heart.png',
     ]);
     Resources.onReady(init);
 

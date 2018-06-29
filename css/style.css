@@ -16,28 +16,50 @@ body {
     background-position: center;
     margin: 0;
     min-height: 100%;
+    color: #333;
 }
 
 canvas {
   margin-top: -20px;
 }
 
+p {
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5em;
+  font-size: 1.1em;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  font-size: 1.1em;
 }
 
 button {
-  border: 2px solid #1f203f;
-  background: linear-gradient(#fde533, #f8951d);
+  /* border: 2px solid #1f203f; */
+  /* background: linear-gradient(#fde533, #f8951d); */
   font-family: 'Montserrat Alternates', sans-serif;
   font-size: 1em;
-  padding: 0.5em 1.5em;
-  border-radius: 10px;
-  margin-top: 20px;
+  padding: 1em 2em;
+  border-radius: 30px;
   cursor: pointer;
   font-weight: 700;
+  background: #5fc148;
+  border: none;
+  color: #fff;
+  letter-spacing: 1.5px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  /* font-size: 0.9em; */
+  box-shadow: 8px 10px 20px 0 rgba(46,61,73,.15);
+  transition: all 0.5s ease;
+}
+
+button:hover {
+  box-shadow: 0px 4px 8px 0 rgba(46,61,73,.2);
+  background: #4bad34;
 }
 
 .scoreboard {
@@ -56,7 +78,7 @@ button {
   /* width: 110px; */
   text-align: left;
   letter-spacing: .9px;
-  font-size: 0.8em;
+  font-size: 16px;
   padding: 7px 15px 7px 29px;
   border-radius: 6px 20px 20px 0px;
 }
@@ -117,9 +139,9 @@ button {
 
 .scoreboard-score:before {
   background: url('../images/Gem Orange.png') no-repeat bottom;
-  background-size: 34.3px;
+  background-size: 43px;
   top: -3px;
-  background-position-y: -19px;
+  background-position-y: -31.5px;
   height: 37px;
 }
 
@@ -202,26 +224,49 @@ button {
   background-position: 0px -50px;
  }
 
-.modal {
+.modal-start,
+.modal-end {
   /* opacity: 0; */
   /* display: none; */
   transition: opacity 1s ease;
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
+  /* padding-top: 100px; */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: #1933af;
+  background: linear-gradient(#1a35b3, #172d94);
+}
+
+.modal-start {
+  padding-top: 100px;
+}
+
+.modal-end {
+  padding-top: 180px;
+}
+
+.modal-bug {
+  position: absolute;
+  top: -42px;
+  width: 100px;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-bubble {
+  position: absolute;
+  width: 80px;
+  top: -110px;
+  right: 33px;
 }
 
 .modal-content {
-  background: linear-gradient(#6fc3ff, #def6ff);
-  margin: auto;
+  margin: 0 auto;
   padding: 30px;
-  width: 440px;
   border-radius: 20px;
   box-shadow: 5px 5px 35px 0 rgba(0,0,0,.4);
   text-align: center;
@@ -235,16 +280,53 @@ button {
   animation-fill-mode: both;
 }
 
-.modal-content:after {
+
+
+.modal-content.game-start {
+  width: 440px;
+  background: linear-gradient(#6fc3ff, #def6ff);
+}
+
+.modal-content.game-start:after,
+.modal-content.game-over:before {
   content: '';
   width: 100%;
-  height: 110px;
   background: #5fc148;
   position: absolute;
-  bottom: 0;
   left: 0;
-  border-radius: 0 0 20px 20px;
   z-index: -1
+}
+
+.modal-content.game-start:after {
+  height: 110px;
+  bottom: 0;
+  border-radius: 0 0 20px 20px;
+}
+
+.modal-content.game-over:before {
+  height: 70px;
+  top: 0;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-content.game-over {
+  background: white;
+  width: 260px;
+}
+
+.modal-content.game-over h3 {
+  color: white;
+  font-size: 1.75em;
+  margin: -10px 0 30px 0;
+  letter-spacing: 1px;
+}
+
+.modal-content ul {
+  line-height: 2.5em;
+}
+
+.modal-end ul {
+  margin: 0.5em 0 0.5em;
 }
 
 .modal-logo {
@@ -284,21 +366,23 @@ button {
 	}
 }
 
-.modal h4 {
+.modal-start h4 {
   font-size: 1.3em;
   font-weight: 600;
   color: #1f1f40;
   margin: 0.5em 0 1em;
 }
 
-.modal p {
+.modal-content.game-start p {
   margin: .75em;
   color: #525C63;
 }
 
-.modal p:first-of-type {
+.modal-start p:first-of-type {
   margin: 1em;
 }
+
+
 
 .visible {
   opacity: 1;
@@ -306,7 +390,8 @@ button {
 
 .hidden {
   /* visibility: hidden; */
-  opacity: 0;
+  /* opacity: 0; */
+  display: none;
   pointer-events: none;
 }
 
@@ -345,5 +430,25 @@ button {
   to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bounceOut {
+  20% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  50%,
+  55% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
   }
 }

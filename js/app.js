@@ -75,7 +75,9 @@ Player.prototype.update = function(dt) {
   //check to see if player reaches top of board
   if (this.y < -15) {
     this.levelUp = true;
-    this.updateScore();
+    this.score += 100;
+    this.level++;
+    updateScoreboard();
   }
 
   if (this.levelUp) {
@@ -87,6 +89,7 @@ Player.prototype.reset = function(dt) {
   // 1. clear enemies from screen
   allEnemies = [];
   allRocks = [];
+  allItems = [];
   // 2. animate player back to starting position
   if (this.y < 380) {
     this.y += 300 * dt;
@@ -100,19 +103,16 @@ Player.prototype.reset = function(dt) {
 Player.prototype.nextLevel = function() {
   if (this.level > 3) {
     startEnemies(4);
-    createRocks(random(4, 8));
+    createRocks(random(4, 7));
+    createItems(1);
   } else {
     startEnemies(3);
     createRocks(random(2, 3));
+    createItems(1);
   }
 }
 
-Player.prototype.updateScore = function() {
-  this.score += 100;
-  this.level++;
-  document.getElementById('level').innerHTML = this.level;
-  document.getElementById('score').innerHTML = this.score;
-}
+
 
 
 Player.prototype.render = function() {
@@ -153,7 +153,7 @@ Rock.prototype.render = function() {
 
 
 
-// check for collision with rock. if true, revert to previous position
+// check for collision with rock. if true, revert player to previous position
 Rock.prototype.update = function() {
   checkCollisions.call(this);
 }
@@ -161,19 +161,53 @@ Rock.prototype.update = function() {
 
 var allRocks = [];
 
-// Rock.prototype.createRocks = function(level) {
-//   // var numRocks = random(1, 6);
-//   var numRocks = level;
-//   var posX = [0, 100, 200, 300, 400, 500];
-//   var posY = [50, 135, 220]
-//   for (var i = 0; i < numRocks; i++) {
-//     var x = posX[Math.floor(Math.random() * posX.length)];
-//     var y = posY[Math.floor(Math.random() * posY.length)];
-//     allRocks.push(new Rock(x, y));
-//   }
-// }
-//
-// createRocks(player.level);
+//---------------------------------------------------------Item
+var Item = function(x, y, sprite) {
+  this.x = x;
+  this.y = y;
+  this.sprite = sprite;
+  // this.color = ['Green', 'Orange', 'Blue'];
+}
+
+Item.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Item.prototype.update = function() {
+  checkCollisions.call(this);
+}
+
+var allItems = [];
+
+function createItems(num) {
+  var posX = [0, 100, 200, 300, 400];
+  var posY = [50, 135, 220];
+  var colors = ['Gem Green', 'Gem Orange', 'Gem Blue', 'heart', 'star'];
+  var sprite = 'images/' + colors[Math.floor(Math.random() * colors.length)] + '.png';
+  // add new row for > level 2
+  if (player.level > 3) {
+    posY.push(305);
+  }
+
+  var x = posX[Math.floor(Math.random() * posX.length)];
+  var y = posY[Math.floor(Math.random() * posY.length)];
+  console.log(`original x = ${x}, y = ${y}`);
+
+
+  // // if cell already has a rock, generate new random location
+  for (var i = 0; i < allRocks.length; i++) {
+    if ((allRocks[i].x === x) && (allRocks[i].y === y)) {
+      x = posX[Math.floor(Math.random() * posX.length)];
+      y = posY[Math.floor(Math.random() * posY.length)];
+      i = -1;
+      console.log(`new x = ${x}, y = ${y}`);
+    }
+  }
+  allItems.push(new Item(x, y, sprite));
+}
+
+
+
 //---------------------------------------------------------
 
 // Now instantiate your objects.
@@ -200,17 +234,27 @@ function startEnemies(num) {
 
 
 var createRocks = function(num) {
-  // var numRocks = random(1, 6);
-  // var numRocks = level;
-  var posX = [0, 100, 200, 300, 400, 500];
+  var posX = [0, 100, 200, 300, 400];
   var posY = [50, 135, 220];
-  if (player.level > 2) {
+  // add new row for > level 2
+  if (player.level > 3) {
     posY.push(305);
   }
   for (var i = 0; i < num; i++) {
     var x = posX[Math.floor(Math.random() * posX.length)];
     var y = posY[Math.floor(Math.random() * posY.length)];
     allRocks.push(new Rock(x, y));
+
+    // ***********************
+    // for (var rock of allRocks) {
+    //   if ((x === rock.x) && (y === rock.y)) {
+    //     console.log('overlap');
+    //     i--;
+    //   } else {
+    //     allRocks.push(new Rock(x, y));
+    //   }
+    // }
+    // ***********************
   }
 }
 
@@ -242,10 +286,11 @@ Player.prototype.restoreHealth = function(lives) {
 
 
 Player.prototype.playerDied = function() {
-  //change sprite to hurt
-  this.sprite = 'images/char-boy-hurt.png';
+  //change sprite to 'hurt' image
+  var playerName = player.sprite.slice(12, this.sprite.length - 4);
+  this.sprite = 'images/char-' + playerName + '-hurt.png';
   setTimeout(function() {
-    player.sprite = 'images/char-boy.png';
+    player.sprite = 'images/char-' + playerName + '.png';
   }, 1000);
 
   // 1. reset position
@@ -253,15 +298,18 @@ Player.prototype.playerDied = function() {
   this.y = 380;
   // 2. decrease score
   if (this.score > 0) {
-    this.score -= 100;
+    this.score -= 50;
   } else {
     this.score = 0;
   }
   // 3. remove health
   this.lives--;
-  document.getElementById('lives').innerHTML = this.lives;
+  updateScoreboard();
   if (this.lives < 1) {
     console.log(`you're toast, bro`);
+    document.getElementById('gameOverModal').classList.toggle('hidden');
+    document.getElementById('modal-score').innerHTML = this.score;
+    document.getElementById('modal-level').innerHTML = this.level;
   }
 }
 
@@ -270,7 +318,7 @@ Player.prototype.playerDied = function() {
 
 
 
-// ++++++++++++++++++++++++++++++++++++++++++++++++++helper functions
+// ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // check for collisions
 function checkCollisions() {
@@ -282,9 +330,27 @@ function checkCollisions() {
           player.y = player.prevY;
         }
         if (this instanceof Enemy) {
-          player.playerDied();
+            player.playerDied();
+        }
+        if (this instanceof Item) {
+          allItems.pop();
+          if (this.sprite === 'images/Gem Blue.png' || this.sprite === 'images/Gem Green.png' || this.sprite === 'images/Gem Orange.png') {
+            player.score += 50;
+          } else if (this.sprite === 'images/star.png') {
+            player.score += 25;
+            allRocks = [];
+          } else if (this.sprite === 'images/heart.png') {
+            player.lives++;
+          }
+          updateScoreboard();
         }
   }
+}
+
+function updateScoreboard() {
+  document.getElementById('level').innerHTML = player.level;
+  document.getElementById('score').innerHTML = player.score;
+  document.getElementById('lives').innerHTML = player.lives;
 }
 
 // helper function for random values
@@ -299,8 +365,12 @@ document.querySelector('.avatar-container').addEventListener('click', function(e
     player.sprite = 'images/char-' + thisCharacter[1] + '.png';
   }
   document.getElementById('avatarModal').classList.toggle('hidden');
-})
+});
 
+document.getElementById('play-again').addEventListener('click', function() {
+  document.getElementById('gameOverModal').classList.toggle('hidden');
+  document.getElementById('avatarModal').classList.toggle('hidden');
+});
 
 
 // This listens for key presses and sends the keys to your

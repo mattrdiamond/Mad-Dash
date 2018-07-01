@@ -75,30 +75,30 @@ Player.prototype.update = function(dt) {
   //check to see if player reaches top of board
   if (this.y < -15) {
     this.levelUp = true;
-    this.score += 100;
-    this.level++;
-    updateScoreboard();
+
+    // this.level++;
+
   }
 
   if (this.levelUp) {
-    this.reset(dt);
+    this.animate(dt);
   }
 }
 
-Player.prototype.reset = function(dt) {
+Player.prototype.animate = function(dt) {
   // 1. clear enemies from screen
-  allEnemies = [];
-  allRocks = [];
-  allItems = [];
+  clearScreen();
   // 2. animate player back to starting position
   if (this.y < 380) {
-    this.y += 300 * dt;
+    this.y += 500 * dt;
   } else {
     // 3. start next level
     this.levelUp = false;
     this.nextLevel();
+
   }
 }
+
 
 Player.prototype.nextLevel = function() {
   if (this.level > 3) {
@@ -110,6 +110,9 @@ Player.prototype.nextLevel = function() {
     createRocks(random(2, 3));
     createItems(1);
   }
+  this.level++;
+  this.score += 100;
+  updateScoreboard();
 }
 
 
@@ -214,7 +217,7 @@ function createItems(num) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-var player = new Player(202, 380);
+
 
 function startEnemies(num) {
   var sprite, index;
@@ -236,7 +239,7 @@ function startEnemies(num) {
 var createRocks = function(num) {
   var posX = [0, 100, 200, 300, 400];
   var posY = [50, 135, 220];
-  // add new row for > level 2
+  // add new row for levels 3+
   if (player.level > 3) {
     posY.push(305);
   }
@@ -263,26 +266,8 @@ var createRocks = function(num) {
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-var heart = '<img src = "images/heart.png">';
 
-// let heartArray = [heart, heart, heart];
-// let heartString = heartArray.join(''); // convert to string to get rid of commas
-// let heartCounter = document.querySelector('scoreboard-hearts');
-// heartCounter.innerHTML = heartString;
 
-// update health each time dies? so you would only need one setlives function instead of restore health and playerDied?
-// reset position
-// lives -- ?? then couldn't use this to reset for new game. maybe put this in checkCollisions?
-// create a previous lives and new lives > if new lives < previous lives decrease score
-// set health based on life count
-// check if dead
-
-// heart counter (old)
-Player.prototype.restoreHealth = function(lives) {
-  // for (var i = 0; i < lives; i++) {
-  //   document.querySelector('.scoreboard-hearts').innerHTML += heart;
-  // }
-}
 
 
 Player.prototype.playerDied = function() {
@@ -297,14 +282,15 @@ Player.prototype.playerDied = function() {
   this.x = 202;
   this.y = 380;
   // 2. decrease score
-  if (this.score > 0) {
-    this.score -= 50;
-  } else {
-    this.score = 0;
-  }
+  // if (this.score > 0) {
+  //   this.score -= 50;
+  // } else {
+  //   this.score = 0;
+  // }
   // 3. remove health
   this.lives--;
   updateScoreboard();
+  // 4. if no lives, display game over modal
   if (this.lives < 1) {
     console.log(`you're toast, bro`);
     document.getElementById('gameOverModal').classList.toggle('hidden');
@@ -353,26 +339,64 @@ function updateScoreboard() {
   document.getElementById('lives').innerHTML = player.lives;
 }
 
+
 // helper function for random values
 function random(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-//avatar selection
+//avatar selection/begin game
 document.querySelector('.avatar-container').addEventListener('click', function(e) {
   var thisCharacter = e.target.classList;
+  var startModal = document.getElementById('avatarModal');
+  // 1. set avatar
   if (thisCharacter.contains('avatar')) {
     player.sprite = 'images/char-' + thisCharacter[1] + '.png';
   }
-  document.getElementById('avatarModal').classList.toggle('hidden');
+  // 2. set up new game
+  newGame();
+  // 3. fade out modal.
+  // startModal.classList.add('fade-out');
+  startModal.classList.add('fade-out');
+
+  // 4. swap out 'fade-out' for 'hidden' to set up next animation.
+  setTimeout(function() {
+    startModal.classList.add('hidden');
+    startModal.classList.remove('fade-out');
+
+  }, 1000);
 });
+
 
 document.getElementById('play-again').addEventListener('click', function() {
-  document.getElementById('gameOverModal').classList.toggle('hidden');
-  document.getElementById('avatarModal').classList.toggle('hidden');
+  document.getElementById('gameOverModal').classList.add('hidden');
+  document.getElementById('avatarModal').classList.remove('hidden');
 });
 
+var player = new Player(202, 380);
 
+function newGame() {
+  // reset scores
+  player.level = 1;
+  player.score = 0;
+  player.lives = 3;
+  updateScoreboard();
+
+  //reset level, score, lives
+  clearScreen();
+
+  startEnemies(3);
+  createRocks(random(2, 3));
+  createItems(1);
+
+
+}
+
+function clearScreen() {
+  allEnemies = [];
+  allRocks = [];
+  allItems = [];
+}
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {

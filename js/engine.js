@@ -178,10 +178,7 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
-        startEnemies(3);
-        createRocks(random(2, 3));
-        createItems(1);
-        player.restoreHealth(3);
+
     }
 
     /* Go ahead and load all of the images we know we're going to need to

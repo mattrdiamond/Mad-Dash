@@ -238,6 +238,7 @@ button:hover {
   height: 100%;
   overflow: auto;
   background: linear-gradient(#1a35b3, #172d94);
+  display: block;
 }
 
 .modal-start {
@@ -384,16 +385,28 @@ button:hover {
 
 
 
-.visible {
-  opacity: 1;
-}
+
 
 .hidden {
   /* visibility: hidden; */
   /* opacity: 0; */
+  /* opacity: 0; */
   display: none;
+  /* pointer-events: none; */
+}
+
+
+
+.fade-out {
+  opacity: 0;
   pointer-events: none;
 }
+
+.visible {
+  display: block;
+}
+
+
 
 @keyframes bounceInDown {
   from,
@@ -430,25 +443,5 @@ button:hover {
   to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes bounceOut {
-  20% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9);
-    transform: scale3d(0.9, 0.9, 0.9);
-  }
-
-  50%,
-  55% {
-    opacity: 1;
-    -webkit-transform: scale3d(1.1, 1.1, 1.1);
-    transform: scale3d(1.1, 1.1, 1.1);
-  }
-
-  to {
-    opacity: 0;
-    -webkit-transform: scale3d(0.3, 0.3, 0.3);
-    transform: scale3d(0.3, 0.3, 0.3);
   }
 }

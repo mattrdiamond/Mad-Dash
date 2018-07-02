@@ -100,7 +100,12 @@ Player.prototype.animate = function(dt) {
 }
 
 
+
 Player.prototype.nextLevel = function() {
+  this.level++;
+  this.score += 100;
+  updateScoreboard();
+
   if (this.level > 3) {
     startEnemies(4);
     createRocks(random(4, 7));
@@ -110,9 +115,6 @@ Player.prototype.nextLevel = function() {
     createRocks(random(2, 3));
     createItems(1);
   }
-  this.level++;
-  this.score += 100;
-  updateScoreboard();
 }
 
 

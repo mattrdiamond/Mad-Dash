@@ -189,15 +189,7 @@ button:hover {
 }
 
 
- @keyframes hop {
-	50% {
-		transform: translateY(-15px);
-	}
 
-	100% {
-		transform: translateY(0);
-	}
-}
 
 .avatar-container {
   display: flex;
@@ -237,7 +229,8 @@ button:hover {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background: linear-gradient(#1a35b3, #172d94);
+  /* background: linear-gradient(#1a35b3, #172d94); */
+  background-color: #035d9e;
   display: block;
 }
 
@@ -273,12 +266,19 @@ button:hover {
   text-align: center;
   position: relative;
   z-index: 0;
-  -webkit-animation-name: bounceInDown;
-  animation-name: bounceInDown;
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+}
+
+.animate-bounce {
+  -webkit-animation-name: bounceInDown;
+  animation-name: bounceInDown;
+}
+
+.animate-jackinthebox {
+  animation-name: jackInTheBox;
 }
 
 
@@ -341,31 +341,7 @@ button:hover {
   animation: wobble-horizontal 1s ease-in-out 1;
 }
 
-@keyframes wobble-horizontal {
-	16.65% {
-		transform: translateX(8px);
-	}
 
-	33.3% {
-		transform: translateX(-6px);
-	}
-
-	49.95% {
-		transform: translateX(4px);
-	}
-
-	66.6% {
-		transform: translateX(-2px);
-	}
-
-	83.25% {
-		transform: translateX(1px);
-	}
-
-	100% {
-		transform: translateX(0);
-	}
-}
 
 .modal-start h4 {
   font-size: 1.3em;
@@ -406,7 +382,15 @@ button:hover {
   display: block;
 }
 
+@keyframes hop {
+ 50% {
+   transform: translateY(-15px);
+ }
 
+ 100% {
+   transform: translateY(0);
+ }
+}
 
 @keyframes bounceInDown {
   from,
@@ -445,3 +429,59 @@ button:hover {
     transform: translate3d(0, 0, 0);
   }
 }
+/* credit: BounceInDown animation by Daniel Eden */
+
+@keyframes jackInTheBox {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.1) rotate(30deg);
+    transform: scale(0.1) rotate(30deg);
+    -webkit-transform-origin: center bottom;
+    transform-origin: center bottom;
+  }
+
+  50% {
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+  }
+
+  70% {
+    -webkit-transform: rotate(3deg);
+    transform: rotate(3deg);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+/* credit: JackInTheBox animation by Daniel Eden */
+
+
+@keyframes wobble-horizontal {
+	16.65% {
+		transform: translateX(8px);
+	}
+
+	33.3% {
+		transform: translateX(-6px);
+	}
+
+	49.95% {
+		transform: translateX(4px);
+	}
+
+	66.6% {
+		transform: translateX(-2px);
+	}
+
+	83.25% {
+		transform: translateX(1px);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
+/* credit: wobble-horizontal animation by Daniel Eden */

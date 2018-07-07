@@ -3,6 +3,7 @@ var Enemy = function(x, y, index, sprite) {
     this.x = x;
     this.y = y;
     this.speed = random(200, 400);
+    // this.speed = speed;
     this.sprite = sprite;
     this.index = index;
 };
@@ -54,6 +55,8 @@ var Player = function(x, y) {
   this.level = 1;
   this.score = 0;
   this.lives = 3;
+  this.speed = 500;
+  this.hurt = false;
   // this.prevX = 0;
 }
 
@@ -90,30 +93,53 @@ Player.prototype.animate = function(dt) {
   clearScreen();
   // 2. animate player back to starting position
   if (this.y < 380) {
-    this.y += 500 * dt;
+    this.y += this.speed * dt;
   } else {
     // 3. start next level
     this.levelUp = false;
-    this.nextLevel();
-
+    nextLevel();
   }
 }
 
 
 
-Player.prototype.nextLevel = function() {
-  this.level++;
-  this.score += 100;
+// Player.prototype.nextLevel = function() {
+//   this.level++;
+//   this.score += 100;
+//   updateScoreboard();
+//
+//   if (this.level > 3) {
+//     startEnemies(4);
+//     createRocks(random(4, 7));
+//     createItems(1);
+//   } else {
+//     startEnemies(3);
+//     createRocks(random(2, 3));
+//     createItems(1);
+//   }
+// }
+
+function nextLevel() {
+  player.level++;
+  player.score += 100;
   updateScoreboard();
 
-  if (this.level > 3) {
+  if (player.level <= 3) {
+    startEnemies(3);
+    // createRocks(random(2, 3));
+    createRocks();
+    createItems(1);
+  } else if ((player.level > 3) && (player.level < 10)) {
     startEnemies(4);
-    createRocks(random(4, 7));
+    // createRocks(random(4, 7));
+    createRocks();
     createItems(1);
   } else {
-    startEnemies(3);
-    createRocks(random(2, 3));
+    startEnemies(4);
+    // createRocks(random(4, 7));
+    createRocks();
     createItems(1);
+    // enemy.speed = random(400, 700);
   }
 }
 
@@ -237,33 +263,60 @@ function startEnemies(num) {
   }
 };
 
+// var createRocks = function(num) {
+//   var posX = [0, 100, 200, 300, 400];
+//   var posY = [50, 135, 220];
+//   // add new row for levels 3+
+//   if (player.level > 3) {
+//     posY.push(305);
+//   }
+//   for (var i = 0; i < num; i++) {
+//     var x = posX[Math.floor(Math.random() * posX.length)];
+//     var y = posY[Math.floor(Math.random() * posY.length)];
+//     allRocks.push(new Rock(x, y));
+//   }
+// }
 
-var createRocks = function(num) {
-  var posX = [0, 100, 200, 300, 400];
-  var posY = [50, 135, 220];
-  // add new row for levels 3+
-  if (player.level > 3) {
-    posY.push(305);
-  }
-  for (var i = 0; i < num; i++) {
-    var x = posX[Math.floor(Math.random() * posX.length)];
-    var y = posY[Math.floor(Math.random() * posY.length)];
-    allRocks.push(new Rock(x, y));
+//grid
+// [0,-35] [100,-35] [200,-35] [300,-35] [400,-35] //water
+// [0,50]  [100,50]  [200,50]  [300,50]  [400,50]
+// [0,135] [100,135] [200,135] [300,135] [400,135]
+// [0,220] [100,220] [200,220] [300,220] [400,220]
+// [0,305] [100,305] [200,305] [300,305] [400,305]
 
-    // ***********************
-    // for (var rock of allRocks) {
-    //   if ((x === rock.x) && (y === rock.y)) {
-    //     console.log('overlap');
-    //     i--;
-    //   } else {
-    //     allRocks.push(new Rock(x, y));
-    //   }
-    // }
-    // ***********************
-  }
+
+var levels = [
+  [[100,135], [300,135]], //1
+  [[0,220], [200,135], [400,50]], //2
+  [[0,135], [200,135], [400,135]], //3
+  [[0,-35], [200,-35], [400,-35], [200,135], [100,220], [300,220]], //4
+  // [[100,50], [300,50], [0,220], [200,220], [400,220]], //5
+  [[0,50], [100,135], [200,50], [200,305], [300,220], [400,305]], //6
+  [[100,-35], [200,-35], [300,-35], [0,220], [100,135], [300,135], [400,220]], //7
+  // [[0,50], [100,220], [200,135], [300,220], [400,50]], //8
+  [[0,305], [100,305], [200,305], [200,135], [300,135], [400,135]], //9
+  [[0,220], [100,50], [200,135], [200,305], [300,50], [400,220]], //10
+  [[0,-35], [200,-35], [400,-35], [100,135], [300,135], [200,305]], //11
+  [[200,-35], [0,220], [100,135], [300,135], [400,220], [200,305]], //12
+  [[0,135], [100,-35], [100,305], [200,135], [300,-35], [300,305], [400,135]], //13
+  [[0,220], [100,305], [300,305], [400,220], [100,50], [200,-35], [300,50]], //14
+  [[0,220], [100,135], [200,50], [300,-35], [200,305], [300,220], [400,135]], //15
+  [[0,-35], [100,-35], [200,-35], [300,-35], [300,50], [100,220], [100,305], [200,305], [300,305], [400,305]], //16
+  [[0,-35], [100,-35], [200,-35], [300,-35], [100,135], [200,135], [300,135], [400,135], [0,305], [100,305], [200,305], [300,305]] //17
+];
+
+function createRocks() {
+  var currentLevel = player.level - 1;
+  // for (var i = 0; i < levels[player.level - 1].length; i++) {
+    for (var i = 0; i < levels[currentLevel].length; i++) {
+      var x = levels[currentLevel][i][0];
+      var y = levels[currentLevel][i][1];
+      console.log(`x is ${x} y is ${y}`);
+      allRocks.push(new Rock(x, y));
+    }
+
+  // }
 }
-
-
 
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -273,16 +326,19 @@ var createRocks = function(num) {
 
 
 Player.prototype.playerDied = function() {
+  // 1. reset position
+  this.x = 202;
+  this.y = 380;
+  this.hurt = true;
   //change sprite to 'hurt' image
   var playerName = player.sprite.slice(12, this.sprite.length - 4);
   this.sprite = 'images/char-' + playerName + '-hurt.png';
   setTimeout(function() {
     player.sprite = 'images/char-' + playerName + '.png';
+    player.hurt = false;
   }, 1000);
 
-  // 1. reset position
-  this.x = 202;
-  this.y = 380;
+
   // 2. decrease score
   // if (this.score > 0) {
   //   this.score -= 50;
@@ -378,7 +434,7 @@ document.getElementById('play-again').addEventListener('click', function() {
 var player = new Player(202, 380);
 
 function newGame() {
-  // reset scores
+  // reset scoreboard
   player.level = 1;
   player.score = 0;
   player.lives = 3;
@@ -388,7 +444,8 @@ function newGame() {
   clearScreen();
 
   startEnemies(3);
-  createRocks(random(2, 3));
+  // createRocks(random(2, 3));
+  createRocks();
   createItems(1);
 
 
@@ -408,6 +465,7 @@ document.addEventListener('keyup', function(e) {
     39: 'right',
     40: 'down'
   };
-
-  player.handleInput(allowedKeys[e.keyCode]);
+  if (!player.hurt) {
+    player.handleInput(allowedKeys[e.keyCode]);
+  }
 });

@@ -124,22 +124,12 @@ function nextLevel() {
   player.score += 100;
   updateScoreboard();
 
+  createRocks();
+  createItems(1);
   if (player.level <= 3) {
     startEnemies(3);
-    // createRocks(random(2, 3));
-    createRocks();
-    createItems(1);
-  } else if ((player.level > 3) && (player.level < 10)) {
-    startEnemies(4);
-    // createRocks(random(4, 7));
-    createRocks();
-    createItems(1);
   } else {
     startEnemies(4);
-    // createRocks(random(4, 7));
-    createRocks();
-    createItems(1);
-    // enemy.speed = random(400, 700);
   }
 }
 
@@ -239,7 +229,7 @@ function createItems(num) {
 
 
 
-//---------------------------------------------------------
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -307,15 +297,12 @@ var levels = [
 
 function createRocks() {
   var currentLevel = player.level - 1;
-  // for (var i = 0; i < levels[player.level - 1].length; i++) {
     for (var i = 0; i < levels[currentLevel].length; i++) {
       var x = levels[currentLevel][i][0];
       var y = levels[currentLevel][i][1];
       console.log(`x is ${x} y is ${y}`);
       allRocks.push(new Rock(x, y));
     }
-
-  // }
 }
 
 

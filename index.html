@@ -29,6 +29,7 @@
       </ul>
     <!-- <div class="scoreboard-hearts"></div> -->
   </div>
+  <!-- **** remove hidden from avatarmodal ************ -->
   <aside id="avatarModal" class="modal-start">
     <div class="modal-content game-start animate-bounce">
       <img class="modal-logo" src="images/logo_1x.png" srcset="images/logo_1x.png 1x, images/logo_2x.png 2x" alt="Mad Dash logo" />
@@ -58,7 +59,26 @@
           Level: <span id="modal-level"></span>
         </li>
       </ul>
-      <button id="play-again">Play Again!</button>
+      <button class="play-again">Play Again!</button>
+    </div>
+  </aside>
+  <aside id="winnerModal" class="modal-winner hidden">
+    <div class="modal-content winner animate-jackinthebox">
+      <img class="modal-castle" src="images/castle.png" alt="princess castle" />
+      <img class="modal-princess" src="images/char-princess-girl.png" alt="princess girl" />
+      <h3>Congratulations!</h3>
+      <p>
+        You saved the princess and restored peace to the kingdom!
+      </p>
+      <ul>
+        <li>
+          Score: <span id="winner-score"></span>
+        </li>
+        <li>
+          Level: <span id="winner-level"></span>
+        </li>
+      </ul>
+      <button class="play-again">Play Again!</button>
     </div>
   </aside>
     <script src="js/resources.js"></script>

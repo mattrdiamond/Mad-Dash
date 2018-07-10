@@ -76,11 +76,15 @@ Player.prototype.update = function(dt) {
   }
 
   //check to see if player reaches top of board
-  if (this.y < -15) {
+  // 1. for levels 1-14, set levelUp to true to animate player to bottom of screen
+  if ((this.y < -15) && (this.level < 15)) {
     this.levelUp = true;
-
-    // this.level++;
-
+    // 2. for final level, toggle winner modal when player reaches the top of board
+  } else if ((this.y < -15) && (this.level >= 15)) {
+    document.getElementById('winnerModal').classList.remove('hidden');
+    document.getElementById('winner-score').innerHTML = this.score;
+    document.getElementById('winner-level').innerHTML = this.level;
+    this.y = 380;
   }
 
   if (this.levelUp) {
@@ -413,10 +417,18 @@ document.querySelector('.avatar-container').addEventListener('click', function(e
 });
 
 
-document.getElementById('play-again').addEventListener('click', function() {
-  document.getElementById('gameOverModal').classList.add('hidden');
-  document.getElementById('avatarModal').classList.remove('hidden');
-});
+// document.getElementById('play-again').addEventListener('click', function() {
+//   document.getElementById('gameOverModal').classList.add('hidden');
+//   document.getElementById('avatarModal').classList.remove('hidden');
+// });
+
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('play-again')) {
+    document.getElementById('gameOverModal').classList.add('hidden');
+    document.getElementById('winnerModal').classList.add('hidden');
+    document.getElementById('avatarModal').classList.remove('hidden');
+  }
+})
 
 var player = new Player(202, 380);
 

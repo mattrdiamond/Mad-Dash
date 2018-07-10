@@ -217,7 +217,8 @@ button:hover {
  }
 
 .modal-start,
-.modal-end {
+.modal-end,
+.modal-winner {
   /* opacity: 0; */
   /* display: none; */
   transition: opacity 1s ease;
@@ -234,13 +235,16 @@ button:hover {
   display: block;
 }
 
-.modal-start {
+.modal-start,
+.modal-winner {
   padding-top: 100px;
 }
 
 .modal-end {
   padding-top: 180px;
 }
+
+
 
 .modal-bug {
   position: absolute;
@@ -288,6 +292,8 @@ button:hover {
   background: linear-gradient(#6fc3ff, #def6ff);
 }
 
+
+
 .modal-content.game-start:after,
 .modal-content.game-over:before {
   content: '';
@@ -311,7 +317,7 @@ button:hover {
 }
 
 .modal-content.game-over {
-  background: white;
+  background: #fff;
   width: 260px;
 }
 
@@ -326,7 +332,41 @@ button:hover {
   line-height: 2.5em;
 }
 
-.modal-end ul {
+.modal-content.winner {
+  background: #fff;
+  width: 300px;
+}
+
+.modal-content.winner:before {
+  content: '';
+  width: 100%;
+  height: 270px;
+  background: #5ab2dc;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  margin-top: -30px;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-content.winner h3 {
+  color: #fff;
+  margin-top: -10px;
+  margin-bottom: 35px;
+  font-size: 1.6em;
+  letter-spacing: 1px;
+}
+
+.modal-winner {
+  background: #ffc800;
+}
+
+.modal-winner button {
+  background: #5ab2dc;
+}
+
+.modal-end ul,
+.modal-winner ul {
   margin: 0.5em 0 0.5em;
 }
 
@@ -359,8 +399,14 @@ button:hover {
   margin: 1em;
 }
 
+.modal-castle {
+  width: 200px;
+}
 
-
+.modal-princess {
+  margin: -200px 0 0;
+  animation: hop 0.5s cubic-bezier(0, 1.13, 0.83, 1.01) infinite;
+}
 
 
 .hidden {

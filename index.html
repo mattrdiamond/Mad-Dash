@@ -5,17 +5,10 @@
     <title>Mad Dash!</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:500,700" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
 </head>
 <body>
   <div class="scoreboard">
-    <!-- <div class="scoreboard-container">
-      <div class="scoreboard-icon">
-        <img src="images/level.svg" alt="level up icon" />
-      </div>
-      <div class="scoreboard-text">
-        Level:
-      </div>
-    </div> -->
       <ul class="scoreboard-list">
         <li class="scoreboard-level">
           Level: <span id="level">1</span>
@@ -27,9 +20,7 @@
           x <span id="lives">3</span>
         </li>
       </ul>
-    <!-- <div class="scoreboard-hearts"></div> -->
   </div>
-  <!-- **** remove hidden from avatarmodal ************ -->
   <aside id="avatarModal" class="modal-start">
     <div class="modal-content game-start animate-bounce">
       <img class="modal-logo" src="images/logo_1x.png" srcset="images/logo_1x.png 1x, images/logo_2x.png 2x" alt="Mad Dash logo" />
@@ -40,7 +31,6 @@
         <div class="avatar horn-girl"></div>
         <div class="avatar cat-girl"></div>
       </div>
-      <!-- <button id="startGame">Play!</button> -->
     </div>
   </aside>
   <aside id="gameOverModal" class="modal-end hidden">

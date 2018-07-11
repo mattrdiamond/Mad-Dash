@@ -3,20 +3,17 @@ html {
 }
 
 body {
-    text-align: center;
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    background-image: url('../images/clouds.svg'), linear-gradient(#6fc3ff, #def6ff);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0;
-    min-height: 100%;
-    color: #333;
+  text-align: center;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  background-image: url('../images/clouds.svg'), linear-gradient(#6fc3ff, #def6ff);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  min-height: 100%;
+  color: #555;
 }
 
 canvas {
@@ -38,8 +35,6 @@ ul {
 }
 
 button {
-  /* border: 2px solid #1f203f; */
-  /* background: linear-gradient(#fde533, #f8951d); */
   font-family: 'Montserrat Alternates', sans-serif;
   font-size: 1em;
   padding: 1em 2em;
@@ -49,18 +44,21 @@ button {
   background: #5fc148;
   border: none;
   color: #fff;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   margin-top: 10px;
   text-transform: uppercase;
-  /* font-size: 0.9em; */
-  box-shadow: 8px 10px 20px 0 rgba(46,61,73,.15);
+  box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);
   transition: all 0.5s ease;
 }
 
 button:hover {
-  box-shadow: 0px 4px 8px 0 rgba(46,61,73,.2);
+  box-shadow: 0px 4px 8px 0 rgba(46,61,73,0.2);
   background: #4bad34;
 }
+
+/*
+ *  Styles for scoreboard
+ */
 
 .scoreboard {
   width: 505px;
@@ -69,29 +67,25 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: #fff;
   font-size: 20px;
 }
 
 .scoreboard li {
   display: inline-block;
-  /* width: 110px; */
   text-align: left;
-  letter-spacing: .9px;
+  letter-spacing: 0.9px;
   font-size: 16px;
   padding: 7px 15px 7px 29px;
   border-radius: 6px 20px 20px 0px;
 }
-
-/* .scoreboard li:nth-of-type(2) {
-  margin: 0 40px;
-} */
 
 .scoreboard-hearts {
   display: inline-block;
   width: 75px;
   text-align: left;
 }
+
 .scoreboard-hearts li {
   display: inline;
   color: #ff4c02;
@@ -110,7 +104,7 @@ button:hover {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  padding-left: 14px; /*match negative 'left' amount of icon*/
+  padding-left: 14px;
 }
 
 .scoreboard-level,
@@ -124,7 +118,6 @@ button:hover {
 .scoreboard-score:before,
 .scoreboard-lives:before {
   content: '';
-  /* background: url('../images/level.svg') no-repeat bottom; */
   width: 33px;
   height: 36px;
   position: absolute;
@@ -151,50 +144,26 @@ button:hover {
   left: -17px;
 }
 
-/* .scoreboard-container {
-  display: flex;
-  background: red;
-  align-items: center;
-  height: 30px;
-  width: 115px;
-}
-
-.scoreboard-icon {
-  width: 30px;
-  height: 30px;
-  padding-bottom: 4px;
-}
-
-.scoreboard-text {
-  font-size: 0.8em;
-  padding-left: 5px;
-  width: 30px;
-} */
-
 /*
- * Styles for modal
+ * Styles for modals
  */
 
 .avatar {
-   width: 100px;
-   height:110px;
-   cursor: pointer;
-   border-radius: 10px;
-   border: 2px solid transparent;
-   /* transition: 0.5s transform ease-out; */
- }
+  width: 100px;
+  height:110px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
 
 .avatar:hover {
   animation: hop 0.5s cubic-bezier(0, 1.13, 0.83, 1.01) infinite;
 }
 
-
-
-
 .avatar-container {
   display: flex;
   justify-content: space-between;
- }
+}
 
 .boy {
   background: url('../images/char-boy.png');
@@ -219,18 +188,14 @@ button:hover {
 .modal-start,
 .modal-end,
 .modal-winner {
-  /* opacity: 0; */
-  /* display: none; */
   transition: opacity 1s ease;
   position: fixed;
   z-index: 1;
-  /* padding-top: 100px; */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  /* background: linear-gradient(#1a35b3, #172d94); */
   background-color: #035d9e;
   display: block;
 }
@@ -243,8 +208,6 @@ button:hover {
 .modal-end {
   padding-top: 180px;
 }
-
-
 
 .modal-bug {
   position: absolute;
@@ -266,7 +229,7 @@ button:hover {
   margin: 0 auto;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 5px 5px 35px 0 rgba(0,0,0,.4);
+  box-shadow: 5px 5px 35px 0 rgba(0,0,0,0.4);
   text-align: center;
   position: relative;
   z-index: 0;
@@ -276,22 +239,10 @@ button:hover {
   animation-fill-mode: both;
 }
 
-.animate-bounce {
-  -webkit-animation-name: bounceInDown;
-  animation-name: bounceInDown;
-}
-
-.animate-jackinthebox {
-  animation-name: jackInTheBox;
-}
-
-
 .modal-content.game-start {
   width: 440px;
   background: linear-gradient(#6fc3ff, #def6ff);
 }
-
-
 
 .modal-content.game-start:after,
 .modal-content.game-over:before {
@@ -365,6 +316,10 @@ button:hover {
   background: #5ab2dc;
 }
 
+.modal-winner button:hover {
+  background: #469ec8;
+}
+
 .modal-end ul,
 .modal-winner ul {
   margin: 0.5em 0 0.5em;
@@ -377,11 +332,8 @@ button:hover {
 }
 
 .modal-logo:hover {
-  /* transform: rotate(-4deg); */
   animation: wobble-horizontal 1s ease-in-out 1;
 }
-
-
 
 .modal-start h4 {
   font-size: 1.3em;
@@ -391,7 +343,7 @@ button:hover {
 }
 
 .modal-content.game-start p {
-  margin: .75em;
+  margin: 0.75em;
   color: #525C63;
 }
 
@@ -405,166 +357,23 @@ button:hover {
 
 .modal-princess {
   margin: -200px 0 0;
-  /* animation: hop 1s cubic-bezier(0, 1.13, 0.83, 1.01) infinite; */
 }
-
 
 .hidden {
-  /* visibility: hidden; */
-  /* opacity: 0; */
-  /* opacity: 0; */
   display: none;
-  /* pointer-events: none; */
 }
-
-
 
 .fade-out {
   opacity: 0;
   pointer-events: none;
 }
 
-.visible {
-  display: block;
+.animate-bounce {
+  -webkit-animation-name: bounceInDown;
+  animation-name: bounceInDown;
 }
 
-@keyframes hop {
- 50% {
-   transform: translateY(-15px);
- }
-
- 100% {
-   transform: translateY(0);
- }
+.animate-jackinthebox {
+  -webkit-animation-name: jackInTheBox;
+  animation-name: jackInTheBox;
 }
-
-@keyframes bounceInDown {
-  from,
-  60%,
-  75%,
-  90%,
-  to {
-    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-  }
-
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -3000px, 0);
-    transform: translate3d(0, -3000px, 0);
-  }
-
-  60% {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 25px, 0);
-    transform: translate3d(0, 25px, 0);
-  }
-
-  75% {
-    -webkit-transform: translate3d(0, -10px, 0);
-    transform: translate3d(0, -10px, 0);
-  }
-
-  90% {
-    -webkit-transform: translate3d(0, 5px, 0);
-    transform: translate3d(0, 5px, 0);
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-/* credit: BounceInDown animation by Daniel Eden */
-
-@keyframes jackInTheBox {
-  from {
-    opacity: 0;
-    -webkit-transform: scale(0.1) rotate(30deg);
-    transform: scale(0.1) rotate(30deg);
-    -webkit-transform-origin: center bottom;
-    transform-origin: center bottom;
-  }
-
-  50% {
-    -webkit-transform: rotate(-10deg);
-    transform: rotate(-10deg);
-  }
-
-  70% {
-    -webkit-transform: rotate(3deg);
-    transform: rotate(3deg);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-}
-/* credit: JackInTheBox animation by Daniel Eden */
-
-
-@keyframes wobble-horizontal {
-	16.65% {
-		transform: translateX(8px);
-	}
-
-	33.3% {
-		transform: translateX(-6px);
-	}
-
-	49.95% {
-		transform: translateX(4px);
-	}
-
-	66.6% {
-		transform: translateX(-2px);
-	}
-
-	83.25% {
-		transform: translateX(1px);
-	}
-
-	100% {
-		transform: translateX(0);
-	}
-}
-/* credit: wobble-horizontal animation by Daniel Eden */
-
-@keyframes zoomInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
-    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  }
-
-  60% {
-    opacity: 1;
-    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
-    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
-    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
-  }
-}
-
-@-webkit-keyframes zoomInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
-    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  }
-
-  60% {
-    opacity: 1;
-    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
-    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
-    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
-  }
-}
-/* credit: zoomInDown animation by Daniel Eden */

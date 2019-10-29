@@ -9,7 +9,7 @@ _Mad Dash!_ is an HTML canvas game based on the classic arcade game “Frogger�
 
 ### To play
 
-👉 Check out the [live version](https://mattrdiamond.github.io/Mad-Dash/) to play now!
+Check out the [live version](https://mattrdiamond.github.io/Mad-Dash/) to play now!
 
 To play in development mode, click on "Clone or Download" on this repository page to download .zip file. Extract the folder contents and open "index.html" in a browser to run the game.
 

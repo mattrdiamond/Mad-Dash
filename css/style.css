@@ -13,12 +13,18 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   margin: 0;
-  min-height: 100%;
+  min-height: 660px;
+  height: 100%;
   color: #444;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 canvas {
   margin-top: -20px;
+  width: 505px;
 }
 
 p {
@@ -57,6 +63,14 @@ button:hover {
   background: #4bad34;
 }
 
+.game-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /*
  *  Styles for scoreboard
  */
@@ -64,7 +78,7 @@ button:hover {
 .scoreboard {
   width: 505px;
   height: 30px;
-  margin: 30px auto 3px;
+  margin: 20px auto 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,16 +212,9 @@ button:hover {
   height: 100%;
   overflow: auto;
   background-color: #035d9e;
-  display: block;
-}
-
-.modal-start,
-.modal-winner {
-  padding-top: 100px;
-}
-
-.modal-end {
-  padding-top: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-bug {
@@ -363,6 +370,10 @@ button:hover {
 .hidden {
   display: none;
 }
+
+/*
+ * Animations
+ */
 
 .fade-out {
   opacity: 0;

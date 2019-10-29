@@ -1,78 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Mad Dash!</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:500,700" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animation.css">
-</head>
-<body>
-  <div class="scoreboard">
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:500,700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animation.css" />
+  </head>
+  <body>
+    <div class="scoreboard">
       <ul class="scoreboard-list">
-        <li class="scoreboard-level">
-          Level: <span id="level">1</span>
-        </li>
-        <li class="scoreboard-score">
-          Score: <span id="score">0</span>
-        </li>
-        <li class="scoreboard-lives">
-          x <span id="lives">3</span>
-        </li>
+        <li class="scoreboard-level">Level: <span id="level">1</span></li>
+        <li class="scoreboard-score">Score: <span id="score">0</span></li>
+        <li class="scoreboard-lives">x <span id="lives">3</span></li>
       </ul>
-  </div>
-  <aside id="avatarModal" class="modal-start">
-    <div class="modal-content game-start animate-bounce">
-      <img class="modal-logo" src="images/logo_1x.png" srcset="images/logo_1x.png 1x, images/logo_2x.png 2x" alt="Mad Dash logo" />
-      <h4>select a character to begin.</h4>
-      <div class="avatar-container">
-        <div class="avatar boy"></div>
-        <div class="avatar pink-girl"></div>
-        <div class="avatar horn-girl"></div>
-        <div class="avatar cat-girl"></div>
+    </div>
+    <aside id="avatarModal" class="modal-start">
+      <div class="modal-content game-start animate-bounce">
+        <img
+          class="modal-logo"
+          src="images/logo_1x.png"
+          srcset="images/logo_1x.png 1x, images/logo_2x.png 2x"
+          alt="Mad Dash logo"
+        />
+        <h4>select a character to begin.</h4>
+        <div class="avatar-container">
+          <div class="avatar boy"></div>
+          <div class="avatar pink-girl"></div>
+          <div class="avatar horn-girl"></div>
+          <div class="avatar cat-girl"></div>
+        </div>
       </div>
-    </div>
-  </aside>
-  <aside id="gameOverModal" class="modal-end hidden">
-    <div class="modal-content game-over animate-jackinthebox">
-      <img class="modal-bug" src="images/enemy-bug.png" alt="enemy bug gloating over their victory" />
-      <img class="modal-bubble" src="images/talk-bubble.svg" alt="you lose" />
-      <h3>Game Over</h3>
-      <p>
-        Bad news friend...<br>you were eaten by bugs.
-      </p>
-      <ul>
-        <li>
-          Score: <span id="modal-score"></span>
-        </li>
-        <li>
-          Level: <span id="modal-level"></span>
-        </li>
-      </ul>
-      <button class="play-again">Play Again!</button>
-    </div>
-  </aside>
-  <aside id="winnerModal" class="modal-winner hidden">
-    <div class="modal-content winner animate-jackinthebox">
-      <img class="modal-castle" src="images/castle.png" alt="princess castle" />
-      <img class="modal-princess" src="images/char-princess-girl.png" alt="princess girl" />
-      <h3>Congratulations!</h3>
-      <p>
-        You saved the princess and restored peace to the kingdom!
-      </p>
-      <ul>
-        <li>
-          Score: <span id="winner-score"></span>
-        </li>
-        <li>
-          Level: <span id="winner-level"></span>
-        </li>
-      </ul>
-      <button class="play-again">Play Again!</button>
-    </div>
-  </aside>
+    </aside>
+    <aside id="gameOverModal" class="modal-end hidden">
+      <div class="modal-content game-over animate-jackinthebox">
+        <img
+          class="modal-bug"
+          src="images/enemy-bug.png"
+          alt="enemy bug gloating over their victory"
+        />
+        <img class="modal-bubble" src="images/talk-bubble.svg" alt="you lose" />
+        <h3>Game Over</h3>
+        <p>Bad news friend...<br />you were eaten by bugs.</p>
+        <ul>
+          <li>Score: <span id="modal-score"></span></li>
+          <li>Level: <span id="modal-level"></span></li>
+        </ul>
+        <button class="play-again">Play Again!</button>
+      </div>
+    </aside>
+    <aside id="winnerModal" class="modal-winner hidden">
+      <div class="modal-content winner animate-jackinthebox">
+        <img
+          class="modal-castle"
+          src="images/castle.png"
+          alt="princess castle"
+        />
+        <img
+          class="modal-princess"
+          src="images/char-princess-girl.png"
+          alt="princess girl"
+        />
+        <h3>Congratulations!</h3>
+        <p>
+          You saved the princess and restored peace to the kingdom!
+        </p>
+        <ul>
+          <li>Score: <span id="winner-score"></span></li>
+          <li>Level: <span id="winner-level"></span></li>
+        </ul>
+        <button class="play-again">Play Again!</button>
+      </div>
+    </aside>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
-</body>
+  </body>
 </html>

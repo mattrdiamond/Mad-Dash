@@ -4,10 +4,11 @@ html {
 
 body {
   text-align: center;
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
   font-weight: 700;
   letter-spacing: 0.3px;
-  background-image: url('../images/clouds.svg'), linear-gradient(#6fc3ff, #def6ff);
+  background-image: url("../images/clouds.svg"),
+    linear-gradient(#6fc3ff, #def6ff);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -35,7 +36,7 @@ ul {
 }
 
 button {
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
   font-size: 1em;
   padding: 1em 2em;
   border-radius: 30px;
@@ -47,12 +48,12 @@ button {
   letter-spacing: 2px;
   margin-top: 10px;
   text-transform: uppercase;
-  box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);
+  box-shadow: 8px 10px 20px 0 rgba(46, 61, 73, 0.15);
   transition: all 0.5s ease;
 }
 
 button:hover {
-  box-shadow: 0px 4px 8px 0 rgba(46,61,73,0.2);
+  box-shadow: 0px 4px 8px 0 rgba(46, 61, 73, 0.2);
   background: #4bad34;
 }
 
@@ -110,14 +111,14 @@ button:hover {
 .scoreboard-level,
 .scoreboard-score,
 .scoreboard-lives {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
 .scoreboard-level:before,
 .scoreboard-score:before,
 .scoreboard-lives:before {
-  content: '';
+  content: "";
   width: 33px;
   height: 36px;
   position: absolute;
@@ -127,11 +128,11 @@ button:hover {
 }
 
 .scoreboard-level:before {
-  background: url('../images/level.svg') no-repeat bottom;
+  background: url("../images/level.svg") no-repeat bottom;
 }
 
 .scoreboard-score:before {
-  background: url('../images/Gem Orange.png') no-repeat bottom;
+  background: url("../images/gem-orange.png") no-repeat bottom;
   background-size: 43px;
   top: -3px;
   background-position-y: -31.5px;
@@ -139,7 +140,7 @@ button:hover {
 }
 
 .scoreboard-lives:before {
-  background: url('../images/heart.svg') no-repeat bottom;
+  background: url("../images/heart.svg") no-repeat bottom;
   width: 35px;
   left: -17px;
 }
@@ -150,7 +151,7 @@ button:hover {
 
 .avatar {
   width: 100px;
-  height:110px;
+  height: 110px;
   cursor: pointer;
   border-radius: 10px;
   border: 2px solid transparent;
@@ -166,24 +167,24 @@ button:hover {
 }
 
 .boy {
-  background: url('../images/char-boy.png');
+  background: url("../images/char-boy.png");
   background-position: 0px -50px;
- }
+}
 
 .pink-girl {
-  background: url('../images/char-pink-girl.png');
+  background: url("../images/char-pink-girl.png");
   background-position: 0px -50px;
- }
+}
 
 .horn-girl {
-  background: url('../images/char-horn-girl.png');
+  background: url("../images/char-horn-girl.png");
   background-position: 0px -50px;
- }
+}
 
 .cat-girl {
-  background: url('../images/char-cat-girl.png');
+  background: url("../images/char-cat-girl.png");
   background-position: 0px -50px;
- }
+}
 
 .modal-start,
 .modal-end,
@@ -229,7 +230,7 @@ button:hover {
   margin: 0 auto;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 5px 5px 35px 0 rgba(0,0,0,0.4);
+  box-shadow: 5px 5px 35px 0 rgba(0, 0, 0, 0.4);
   text-align: center;
   position: relative;
   z-index: 0;
@@ -246,12 +247,12 @@ button:hover {
 
 .modal-content.game-start:after,
 .modal-content.game-over:before {
-  content: '';
+  content: "";
   width: 100%;
   background: #5fc148;
   position: absolute;
   left: 0;
-  z-index: -1
+  z-index: -1;
 }
 
 .modal-content.game-start:after {
@@ -288,7 +289,7 @@ button:hover {
 }
 
 .modal-content.winner:before {
-  content: '';
+  content: "";
   width: 100%;
   height: 270px;
   background: #5ab2dc;
@@ -344,7 +345,7 @@ button:hover {
 
 .modal-content.game-start p {
   margin: 0.75em;
-  color: #525C63;
+  color: #525c63;
 }
 
 .modal-start p:first-of-type {

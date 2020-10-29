@@ -1,3 +1,5 @@
+![Screenshot of Mad Dash](images/mad_dash.jpg)
+
 # Mad Dash!
 
 _Mad Dash!_ is an HTML canvas game based on the classic arcade game “Frogger” by Konami. The objective is to cross the road and reach the water without colliding with any evil bugs. Each time a player reaches the water, they will return to the bottom of the screen to start the next level.
